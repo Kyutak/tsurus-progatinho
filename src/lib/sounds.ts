@@ -1,14 +1,22 @@
 // Sons via arquivos MP3
+function playSound(path: string) {
+  if (typeof window === 'undefined') return;
+
+  const audio = new Audio(path);
+  audio.volume = 0.5;
+  audio.preload = 'auto';
+
+  audio.play().catch((error) => {
+    console.error(`Failed to play sound ${path}:`, error);
+  });
+}
+
 export function playFalling() {
-  const audio = new Audio('/sounds/falling.mp3');
-  audio.volume = 0.5; // ajustar volume se necessário
-  audio.play().catch(() => {}); // ignorar erros se não conseguir tocar
+  playSound('/sounds/falling.mp3');
 }
 
 export function playVanish() {
-  const audio = new Audio('/sounds/vanish.mp3');
-  audio.volume = 0.5;
-  audio.play().catch(() => {});
+  playSound('/sounds/vanish.mp3');
 }
 
 // Sons sintéticos via Web Audio API — leves, sem precisar de arquivos
